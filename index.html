@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz 21 de septiembre </title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #000000;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 182, 193, 0.6);
+            font-size: 20px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-lions {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .lion {
+            position: absolute;
+            font-size: 35px;
+            animation: lionFloat 8s ease-in-out infinite;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .lion.cute {
+            animation: lionBounce 4s ease-in-out infinite;
+        }
+
+        .lion.sleeping {
+            animation: lionSleep 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes lionFloat {
+            0% {
+                transform: translateX(-100px) translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(50px) translateY(50vh) rotate(10deg);
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100px) translateY(-100px) rotate(-10deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes lionBounce {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+            }
+            50% {
+                transform: translateY(-20px) scale(1.1);
+            }
+        }
+
+        @keyframes lionSleep {
+            0%, 100% {
+                transform: rotate(-5deg);
+                opacity: 0.8;
+            }
+            50% {
+                transform: rotate(5deg);
+                opacity: 1;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 182, 193, 0.3);
+        }
+
+        .login-section {
+            padding: 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #ff7675, #fd79a8);
+            color: white;
+            position: relative;
+        }
+
+        .login-section::before {
+            content: "🦁";
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 30px;
+            animation: lionBounce 3s ease-in-out infinite;
+        }
+
+        .login-section::after {
+            content: "🧸";
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            font-size: 25px;
+            animation: lionSleep 4s ease-in-out infinite;
+        }
+
+        .login-section h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-section p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .love-quotes {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-style: italic;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: right;
+        }
+
+        .form-section {
+            padding: 40px;
+            display: none;
+            position: relative;
+        }
+
+        .form-section::before {
+            content: "🦁💕";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 25px;
+            animation: lionBounce 2s ease-in-out infinite;
+        }
+
+        .question {
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .question.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .question h3 {
+            color: #d63031;
+            margin-bottom: 15px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8em;
+        }
+
+        .memory-box {
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.1), rgba(253, 121, 168, 0.05));
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(253, 121, 168, 0.3);
+            margin-top: 15px;
+            box-shadow: 0 8px 25px rgba(253, 121, 168, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .memory-box::before {
+            content: "🦁";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 25px;
+            opacity: 0.7;
+            animation: lionSleep 3s ease-in-out infinite;
+        }
+
+        .my-memory {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #2d3436;
+            font-style: italic;
+            margin: 0;
+            text-align: left;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(232, 67, 147, 0.3);
+        }
+
+        .btn::before {
+            content: "🦁";
+            position: absolute;
+            left: -35px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            animation: lionBounce 2s ease-in-out infinite;
+        }
+
+        .sunflower-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .modal-content::before {
+            content: "🦁❤️";
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 30px;
+            animation: lionBounce 3s ease-in-out infinite;
+        }
+
+        .modal h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5em;
+            color: #d63031;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .letter-content {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #fd79a8;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #2d3436;
+            position: relative;
+        }
+
+        .letter-content::after {
+            content: "🧸🦁";
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            font-size: 20px;
+            opacity: 0.6;
+        }
+
+        .close {
+            color: #d63031;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+        }
+
+        .close:hover {
+            color: #b71c1c;
+        }
+
+        .final-question {
+            background: rgba(255, 182, 193, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #fd79a8;
+            margin: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .final-question::before {
+            content: "🦁💭";
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 20px;
+            opacity: 0.7;
+        }
+
+        .final-question h3 {
+            color: #d63031;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 20px 0;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            color: #d63031;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-option:hover {
+            transform: scale(1.1);
+            color: #e84393;
+        }
+
+        .checkbox-option input[type="radio"] {
+            display: none;
+        }
+
+        .checkmark {
+            width: 25px;
+            height: 25px;
+            border: 2px solid #fd79a8;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .checkbox-option input[type="radio"]:checked + .checkmark {
+            background: #fd79a8;
+            color: white;
+        }
+
+        .final-text {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .final-text::before {
+            content: "🦁🌻";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+        }
+
+        .whatsapp-text {
+            color: #666;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+
+        .english-phrases {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+            z-index: 100;
+        }
+
+        .lion-corner {
+            position: fixed;
+            bottom: 80px;
+            right: 30px;
+            font-size: 40px;
+            animation: lionSleep 5s ease-in-out infinite;
+            z-index: 100;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .card {
+                margin: 10px 0;
+                max-width: 95%;
+            }
+            
+            .login-section, .form-section {
+                padding: 25px 15px;
+            }
+            
+            .login-section h1 {
+                font-size: 2.2em;
+                margin-bottom: 15px;
+            }
+            
+            .login-section p {
+                font-size: 1em;
+                margin-bottom: 20px;
+            }
+            
+            .question h3 {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+            }
+            
+            .memory-box {
+                padding: 20px 15px;
+                margin-top: 10px;
+            }
+            
+            .my-memory {
+                font-size: 15px;
+                line-height: 1.6;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 16px;
+                margin: 15px auto;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                padding: 25px 20px;
+                width: 95%;
+                max-height: 85vh;
+            }
+            
+            .modal h2 {
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
+            
+            .letter-content {
+                padding: 20px 15px;
+                font-size: 16px;
+                line-height: 1.5;
+            }
+            
+            .love-quotes {
+                font-size: 12px;
+                top: 15px;
+                right: 15px;
+            }
+            
+            .english-phrases {
+                bottom: 10px;
+                left: 10px;
+                font-size: 14px;
+            }
+            
+            .floating-hearts .heart {
+                font-size: 16px;
+            }
+
+            .lion {
+                font-size: 25px;
+            }
+
+            .lion-corner {
+                font-size: 30px;
+                bottom: 60px;
+                right: 20px;
+            }
+            
+            .checkbox-container {
+                gap: 20px;
+            }
+            
+            .checkbox-option {
+                font-size: 16px;
+            }
+            
+            .final-question h3 {
+                font-size: 1.5em;
+            }
+            
+            .final-text {
+                font-size: 16px;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-section h1 {
+                font-size: 1.8em;
+            }
+            
+            .question h3 {
+                font-size: 1.3em;
+            }
+            
+            .memory-box {
+                padding: 15px 12px;
+            }
+            
+            .my-memory {
+                font-size: 14px;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 15px;
+            }
+            
+            .modal-content {
+                margin: 5% auto;
+                padding: 20px 15px;
+                width: 98%;
+            }
+            
+            .modal h2 {
+                font-size: 1.7em;
+            }
+            
+            .letter-content {
+                padding: 15px 10px;
+                font-size: 15px;
+            }
+            
+            .love-quotes {
+                font-size: 11px;
+                top: 10px;
+                right: 10px;
+            }
+            
+            .english-phrases {
+                font-size: 13px;
+            }
+
+            .lion {
+                font-size: 20px;
+            }
+
+            .lion-corner {
+                font-size: 25px;
+            }
+            
+            .checkbox-container {
+                gap: 20px;
+            }
+            
+            .checkbox-option {
+                font-size: 16px;
+            }
+            
+            .final-question h3 {
+                font-size: 1.5em;
+            }
+            
+            .final-text {
+                font-size: 16px;
+                padding: 15px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1000px;
+            }
+            
+            .card {
+                max-width: 700px;
+            }
+            
+            .login-section h1 {
+                font-size: 3.5em;
+            }
+            
+            .question h3 {
+                font-size: 2em;
+            }
+            
+            .my-memory {
+                font-size: 17px;
+            }
+            
+            .modal-content {
+                max-width: 700px;
+            }
+
+            .lion {
+                font-size: 45px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts"></div>
+    <div class="floating-lions"></div>
+    <canvas class="sunflower-canvas" id="sunflowerCanvas"></canvas>
+    
+    <div class="lion-corner">🧸</div>
+    
+    <div class="english-phrases">
+        <div>I miss you... </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="login-section" id="loginSection">
+                <div class="love-quotes">
+                    "Espero te guste"<br>
+                     "I think of you
+"
+                </div>
+                <h1>Esto es para ti, Allison...</h1>
+                <p>Espero te guste lo que preparé para ti con mucho cariño. </p> <p>Feliz 21 de septiembre <3</p>
+                
+                <button class="btn" onclick="showQuestions()">Continuar...</button>
+            </div>
+
+            <div class="form-section" id="formSection">
+                <div class="question active">
+                    <h3>¿Recuerdas las veces que salíamos del icpna juntos? 🌸</h3>
+                    
+                    <div class="memory-box">
+                        <p class="my-memory">Las veces que comiamos yuquitas 
+                            saliendo del icpna y la vez que casi morimos atropellados 
+                            porque doña enojona hizo su berrinche en medio de la 
+                            pista... Cuando te esperaba en la salida solo para poder verte.. :(
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>¿Qué es lo que más extrañas de nosotros? 💭</h3>                    
+                    <div class="memory-box">
+                        <p class="my-memory">Yo extraño hablar contigo todas las noches, cuando me ofendias jajjaa, no sabía si lo hacías porque en verdad te enojaba o porque era de cariño... pero eso me encantaba, eres simplemente tú</p>
+                    </div>
+                </div>
+
+                <button class="btn" onclick="nextQuestion()" id="nextBtn">Siguiente</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="letterModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Perdón por tan poco </h2>
+            <div class="letter-content">
+                <p><strong>Mi querida Allison,</strong></p>
+                <br>
+                <p>Si estás leyendo esto, significa que has llegado hasta el final, y eso ya significa mucho para mí.</p>
+                <br>
+                <p>Bueno mi Alli, para empezar, tenía las intenciones de ir a verte con las flores amarillas y no sabía donde podria verte... le pregunte a Lu y nunca respondió y si te preguntaba a ti pues se arruinaría la sorpresa.
+                La verdad no tengo palabras para poder hacerte esta carta, me nació hacerte este pequeño detalle y espero te guste. Allison, yo sé que la malogré contigo, haber pasado esos momentos tan lindos juntos, cuando me enamoro suelo ser intenso y perdón por eso.
+                </p>
+                <br>
+                <p>Por donde empezar, ya debes estar cansada de todas las veces que te he escrito la verdad, pero este será mi último intento. Quería hacer todo lo posible para poder tener una oportunidad contigo, porque me interesas mucho Allison, 
+                    simplemente dia a dia me fue cautivando tu forma de ser, eres simplemente tú, dices las cosas muy directas y eso me fue enamorando. Eres una mujer sensacional, cuando te vi por primera vez un marzo del 2024 pensé que eras mala, hasta que topé contigo
+                un abril, te conocí, nos hicimos amigos, hasta que sentí que nuestra amistad no era para ser simplemente una amistad. Yo reconozco que la malogré contigo, pero si tú me das una oportunidad para poder comenzar de nuevo, 
+            no sabes como saltaría de felicidad, todas las noches hablo de ti con mis amigos y me dicen lo mismo, que fui tonto.. </p>
+              <p> En verdad, ya no sé que más decir, te extraño y no sé si tú también. Allison, no sé qué pasará después de esto, pero lo que sí sé es que siempre te recordaré con cariño, porque me marcaste de una forma que pocas personas logran, tú mirada y tú manera de ser fue lo que me envolvió, no soy bueno haciendo cartas, no sé si lo que estoy haciendo ahora se considera una carta
+                pero, lo hago con todo mi cariño, me nació hacerlo para ti y aprovechar este 21, como repito, no sé si tendrás otros intereses... perdóname por tan poco Alli. Por Último, quiero decirte que te quiero 3 millones jeje y sea cual sea tu respuesta estaré agradecido por tomarte el tiempo de leer mi mensaje.
+              </p>
+                
+                <div class="final-question">
+                    <h3>¿Quisieras darme una oportunidad más?</h3>
+                    <div class="checkbox-container">
+                        <label class="checkbox-option">
+                            <input type="radio" name="opportunity" value="si" onchange="showFinalMessage()">
+                            <span class="checkmark">✓</span>
+                            Sí
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="radio" name="opportunity" value="no" onchange="showFinalMessage()">
+                            <span class="checkmark">✓</span>
+                            No
+                        </label>
+                    </div>
+                    
+                    <div id="finalMessage" style="display: none;">
+                        <p class="final-text">
+                            <strong>Espero te haya gustado y me llegues a contar tu respuesta</strong>
+                        </p>
+                        <p class="whatsapp-text">
+                            <em>Solo quería que supieras lo que siento por ti </em>
+                        </p>
+                    </div>
+                </div>
+                
+                
+                <p><em>"I miss you more than words can say, and I hope you feel the same way too."</em></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 0;
+        const questions = document.querySelectorAll('.question');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function createHearts() {
+            const heartsContainer = document.querySelector('.floating-hearts');
+            const hearts = ['❤️', '💕', '💖', '💗', '🌹', '💝'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                heartsContainer.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 6000);
+            }, 1000);
+        }
+
+        function createLions() {
+            const lionsContainer = document.querySelector('.floating-lions');
+            const lions = ['🦁', '🧸', '🦁❤️', '🧸💕', '🦁🌻'];
+            const animations = ['lionFloat', 'lionBounce', 'lionSleep'];
+            
+            setInterval(() => {
+                if (Math.random() < 0.7) { 
+                    const lion = document.createElement('div');
+                    lion.className = 'lion';
+                    lion.textContent = lions[Math.floor(Math.random() * lions.length)];
+                    lion.style.left = Math.random() * 100 + '%';
+                    lion.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                    
+                    const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+                    if (randomAnimation !== 'lionFloat') {
+                        lion.classList.add(randomAnimation.replace('lion', '').toLowerCase());
+                        lion.style.position = 'fixed';
+                        lion.style.top = Math.random() * 60 + 20 + '%';
+                        lion.style.left = Math.random() * 80 + 10 + '%';
+                        
+                        setTimeout(() => {
+                            lion.remove();
+                        }, 8000);
+                    } else {
+                        lionsContainer.appendChild(lion);
+                        setTimeout(() => {
+                            lion.remove();
+                        }, 8000);
+                    }
+                    
+                    if (randomAnimation === 'lionFloat') {
+                        lionsContainer.appendChild(lion);
+                    } else {
+                        document.body.appendChild(lion);
+                    }
+                }
+            }, 2000);
+        }
+
+        function drawPetals() {
+            const canvas = document.getElementById('sunflowerCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const petals = [];
+            const sunflowers = [];
+            let showMessage = false;
+            let messageOpacity = 0;
+
+            function createPetal() {
+                return {
+                    x: Math.random() * canvas.width,
+                    y: -20,
+                    size: Math.random() * 25 + 15,
+                    rotation: Math.random() * Math.PI * 2,
+                    rotationSpeed: (Math.random() - 0.5) * 0.02,
+                    speedY: Math.random() * 2 + 1,
+                    speedX: (Math.random() - 0.5) * 0.5,
+                    opacity: Math.random() * 0.7 + 0.3,
+                    color: Math.random() > 0.5 ? '#f1c40f' : '#e67e22',
+                    transforming: false,
+                    transformProgress: 0
+                };
+            }
+
+            function createSunflower(x, y, size) {
+                return {
+                    x: x,
+                    y: y,
+                    size: size,
+                    rotation: 0,
+                    rotationSpeed: 0.005,
+                    petalsCount: 12,
+                    opacity: 0,
+                    growing: true,
+                    life: 0,
+                    maxLife: 1200,
+                    finalSize: size
+                };
+            }
+
+            function drawPetal(petal) {
+                ctx.save();
+                ctx.globalAlpha = petal.opacity * (1 - petal.transformProgress);
+                ctx.translate(petal.x, petal.y);
+                ctx.rotate(petal.rotation);
+
+                ctx.beginPath();
+                ctx.ellipse(0, 0, petal.size, petal.size * 0.4, 0, 0, Math.PI * 2);
+                
+                const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, petal.size);
+                gradient.addColorStop(0, petal.color);
+                gradient.addColorStop(1, petal.color + '80');
+                
+                ctx.fillStyle = gradient;
+                ctx.fill();
+
+                ctx.shadowColor = petal.color;
+                ctx.shadowBlur = 10;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
+
+                ctx.restore();
+            }
+
+            function drawSunflower(sunflower) {
+                ctx.save();
+                ctx.globalAlpha = sunflower.opacity;
+                ctx.translate(sunflower.x, sunflower.y);
+                ctx.rotate(sunflower.rotation);
+
+                for (let i = 0; i < sunflower.petalsCount; i++) {
+                    ctx.save();
+                    ctx.rotate((Math.PI * 2 / sunflower.petalsCount) * i);
+                    
+                    ctx.beginPath();
+                    ctx.ellipse(sunflower.size * 0.7, 0, sunflower.size * 0.3, sunflower.size * 0.15, 0, 0, Math.PI * 2);
+                    
+                    const petalGradient = ctx.createRadialGradient(sunflower.size * 0.7, 0, 0, sunflower.size * 0.7, 0, sunflower.size * 0.3);
+                    petalGradient.addColorStop(0, '#f1c40f');
+                    petalGradient.addColorStop(1, '#e67e22');
+                    
+                    ctx.fillStyle = petalGradient;
+                    ctx.fill();
+                    
+                    ctx.shadowColor = '#f39c12';
+                    ctx.shadowBlur = 5;
+                    
+                    ctx.restore();
+                }
+
+                ctx.beginPath();
+                ctx.arc(0, 0, sunflower.size * 0.4, 0, Math.PI * 2);
+                
+                const centerGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, sunflower.size * 0.4);
+                centerGradient.addColorStop(0, '#8b4513');
+                centerGradient.addColorStop(0.7, '#654321');
+                centerGradient.addColorStop(1, '#3e2723');
+                
+                ctx.fillStyle = centerGradient;
+                ctx.fill();
+
+                ctx.fillStyle = '#2c1810';
+                for (let i = 0; i < 20; i++) {
+                    const angle = (Math.PI * 2 / 20) * i;
+                    const radius = sunflower.size * 0.25;
+                    const x = Math.cos(angle) * radius;
+                    const y = Math.sin(angle) * radius;
+                    
+                    ctx.beginPath();
+                    ctx.arc(x, y, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                ctx.restore();
+            }
+
+            function drawMessage() {
+                if (showMessage) {
+                    ctx.save();
+                    ctx.globalAlpha = messageOpacity;
+                    
+                    const centerX = canvas.width / 2;
+                    const centerY = canvas.height / 2;
+                    
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                    ctx.beginPath();
+                    ctx.roundRect(centerX - 200, centerY - 60, 400, 120, 20);
+                    ctx.fill();
+                    
+                    ctx.fillStyle = '#f1c40f';
+                    ctx.font = 'bold 36px "Dancing Script", cursive';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('No estés triste...', centerX, centerY - 10);
+                    
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = '18px "Poppins", sans-serif';
+                    ctx.fillText('Los girasoles están aquí para ti 🌻', centerX, centerY + 25);
+                    
+                    ctx.restore();
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                petals.forEach((petal, index) => {
+                    if (!petal.transforming) {
+                        petal.y += petal.speedY;
+                        petal.x += petal.speedX;
+                        petal.rotation += petal.rotationSpeed;
+
+                        petal.x += Math.sin(petal.y * 0.01) * 0.5;
+
+                        if (petal.y > canvas.height * 0.6 && Math.random() < 0.03) {
+                            petal.transforming = true;
+                            petal.speedY = 0;
+                            petal.speedX = 0;
+                        }
+
+                        drawPetal(petal);
+
+                        if (petal.y > canvas.height + 50) {
+                            petals.splice(index, 1);
+                        }
+                    } else {
+                        petal.transformProgress += 0.05;
+                        drawPetal(petal);
+
+                        if (petal.transformProgress >= 1) {
+                            sunflowers.push(createSunflower(petal.x, petal.y, petal.size * 1.8));
+                            petals.splice(index, 1);
+                        }
+                    }
+                });
+
+                sunflowers.forEach((sunflower, index) => {
+                    if (sunflower.growing) {
+                        sunflower.opacity += 0.02;
+                        if (sunflower.opacity >= 0.8) {
+                            sunflower.growing = false;
+                        }
+                    }
+
+                    sunflower.rotation += sunflower.rotationSpeed;
+                    sunflower.life++;
+
+                    drawSunflower(sunflower);
+
+                    if (sunflower.life > sunflower.maxLife) {
+                        sunflower.opacity -= 0.005;
+                        if (sunflower.opacity <= 0) {
+                            sunflowers.splice(index, 1);
+                        }
+                    }
+                });
+
+                if (sunflowers.length >= 15 && !showMessage) {
+                    showMessage = true;
+                }
+
+                if (showMessage && messageOpacity < 1) {
+                    messageOpacity += 0.02;
+                }
+
+                if (showMessage && sunflowers.length < 8) {
+                    messageOpacity -= 0.03;
+                    if (messageOpacity <= 0) {
+                        showMessage = false;
+                        messageOpacity = 0;
+                    }
+                }
+
+                drawMessage();
+                requestAnimationFrame(animate);
+            }
+
+            setInterval(() => {
+                if (petals.length < 30) {
+                    petals.push(createPetal());
+                }
+            }, 200);
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+
+        function showQuestions() {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('formSection').style.display = 'block';
+            questions[0].classList.add('active');
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                questions[currentQuestion].classList.remove('active');
+                currentQuestion++;
+                setTimeout(() => {
+                    questions[currentQuestion].classList.add('active');
+                }, 300);
+                
+                if (currentQuestion === questions.length - 1) {
+                    nextBtn.textContent = 'Te gustaría ver mi carta que hice para ti?';
+                }
+            } else {
+                document.getElementById('letterModal').style.display = 'block';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('letterModal').style.display = 'none';
+        }
+
+        function showFinalMessage() {
+            document.getElementById('finalMessage').style.display = 'block';
+            
+            createLionExplosion();
+        }
+
+        function createLionExplosion() {
+            const lions = ['🦁', '🧸', '🦁❤️', '🧸💕', '🦁🌻', '🧸🌸'];
+            
+            for (let i = 0; i < 12; i++) {
+                setTimeout(() => {
+                    const lion = document.createElement('div');
+                    lion.style.position = 'fixed';
+                    lion.style.left = '50%';
+                    lion.style.top = '50%';
+                    lion.style.fontSize = '30px';
+                    lion.style.zIndex = '1001';
+                    lion.style.pointerEvents = 'none';
+                    lion.textContent = lions[Math.floor(Math.random() * lions.length)];
+                    
+                    const angle = (Math.PI * 2 / 12) * i;
+                    const distance = 150;
+                    const finalX = Math.cos(angle) * distance;
+                    const finalY = Math.sin(angle) * distance;
+                    
+                    lion.style.animation = `lionExplosion 2s ease-out forwards`;
+                    lion.style.transform = `translate(-50%, -50%) translate(${finalX}px, ${finalY}px) scale(0)`;
+                    
+                    document.body.appendChild(lion);
+                    
+                    setTimeout(() => {
+                        lion.remove();
+                    }, 2000);
+                }, i * 100);
+            }
+        }
+
+        // Agregar keyframes para la explosión de leoncitos
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes lionExplosion {
+                0% {
+                    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                    opacity: 0;
+                }
+                50% {
+                    opacity: 1;
+                    transform: translate(-50%, -50%) scale(1.5) rotate(180deg);
+                }
+                100% {
+                    transform: translate(-50%, -50%) scale(0.8) rotate(360deg);
+                    opacity: 0.8;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && document.getElementById('formSection').style.display === 'block') {
+                nextQuestion();
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (Math.random() < 0.3) { 
+                createClickLion(e.clientX, e.clientY);
+            }
+        });
+
+        function createClickLion(x, y) {
+            const lions = ['🦁', '🧸'];
+            const lion = document.createElement('div');
+            lion.style.position = 'fixed';
+            lion.style.left = x + 'px';
+            lion.style.top = y + 'px';
+            lion.style.fontSize = '25px';
+            lion.style.zIndex = '999';
+            lion.style.pointerEvents = 'none';
+            lion.style.animation = 'lionClick 1s ease-out forwards';
+            lion.textContent = lions[Math.floor(Math.random() * lions.length)];
+            
+            document.body.appendChild(lion);
+            
+            setTimeout(() => {
+                lion.remove();
+            }, 1000);
+        }
+
+        const clickStyle = document.createElement('style');
+        clickStyle.textContent = `
+            @keyframes lionClick {
+                0% {
+                    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                    opacity: 1;
+                }
+                50% {
+                    transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translate(-50%, -50%) scale(0) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(clickStyle);
+
+        // Inicializar
+        createHearts();
+        createLions();
+        drawPetals();
+    </script>
+</body>
+</html>
